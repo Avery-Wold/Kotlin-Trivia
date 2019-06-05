@@ -7,5 +7,9 @@ package com.example.averyw.triviaapp
 
 class QuestionList(val results: List<Questions>)
 
-class Questions(val question: String, val correct_answer: String, val incorrect_answers: List<String>)
+class Questions(
+        var question: String = "",
+        var correct_answer: String = "",
+        var incorrect_answers: List<String> = emptyList()
+)
 
