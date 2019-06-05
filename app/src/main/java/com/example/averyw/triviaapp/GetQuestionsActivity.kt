@@ -53,7 +53,6 @@ class GetQuestionsActivity : AppCompatActivity() {
                 } else {
                     Toast.makeText(this, "Sorry, the correct answer was $correctAnswer", Toast.LENGTH_SHORT).show()
                 }
-                updateQuestion()
             }
             R.id.button2-> {
                 if(button2.text == correctAnswer){
@@ -61,7 +60,6 @@ class GetQuestionsActivity : AppCompatActivity() {
                 } else {
                     Toast.makeText(this, "Sorry, the correct answer was $correctAnswer", Toast.LENGTH_SHORT).show()
                 }
-                updateQuestion()
             }
             R.id.button3-> {
                 if(button3.text == correctAnswer){
@@ -69,7 +67,6 @@ class GetQuestionsActivity : AppCompatActivity() {
                 } else {
                     Toast.makeText(this, "Sorry, the correct answer was $correctAnswer", Toast.LENGTH_SHORT).show()
                 }
-                updateQuestion()
             }
             R.id.button4-> {
                 if(button4.text == correctAnswer){
@@ -77,9 +74,9 @@ class GetQuestionsActivity : AppCompatActivity() {
                 } else {
                     Toast.makeText(this, "Sorry, the correct answer was $correctAnswer", Toast.LENGTH_SHORT).show()
                 }
-                updateQuestion()
             }
         }
+        updateQuestion()
     }
 
     private fun fetchData() {
