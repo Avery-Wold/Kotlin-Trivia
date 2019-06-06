@@ -1,6 +1,7 @@
 package com.example.averyw.triviaapp
 
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
@@ -18,8 +19,11 @@ import java.util.*
 /**
  * Created by AveryW on 5/23/2019.
  */
-class GetQuestionsActivity : AppCompatActivity() {
 
+const val TOTAL_SCORE = ""
+const val NUM_QUESTIONS = ""
+
+class GetQuestionsActivity : AppCompatActivity() {
 
     var questions : MutableList<Questions> = ArrayList()
 //    val questionList: MutableList<Questions>
@@ -143,15 +147,20 @@ class GetQuestionsActivity : AppCompatActivity() {
             button4.text = Html.fromHtml(randomAnswers[3]).toString()
             number_textView.text = "${index + 1} / ${questions.size}"
         } else {
+            intent = Intent(this, ResultsActivity::class.java).apply {
+                putExtra(TOTAL_SCORE, score)
+//                putExtra(NUM_QUESTIONS, questions.size)
+            }
+            startActivity(intent)
             // add ending screen
-            val dialog = AlertDialog.Builder(this)
-            dialog.setTitle("Your score")
-            dialog.setMessage("You have answered $score out of ${questions.size} correct")
-            dialog.setPositiveButton("Close", DialogInterface.OnClickListener(){
-                dialogInterface: DialogInterface, i: Int -> dialogInterface.dismiss()
-                finish()
-            })
-            dialog.show()
+//            val dialog = AlertDialog.Builder(this)
+//            dialog.setTitle("Your score")
+//            dialog.setMessage("You have answered $score out of ${questions.size} correct")
+//            dialog.setPositiveButton("Close", DialogInterface.OnClickListener(){
+//                dialogInterface: DialogInterface, i: Int -> dialogInterface.dismiss()
+//                finish()
+//            })
+//            dialog.show()
         }
     }
 

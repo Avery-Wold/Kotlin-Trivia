@@ -40,7 +40,8 @@ class QuestionsAdapter(val questionList: MutableList<Questions>): RecyclerView.A
 
         holder?.customView?.number_textView?.text = currentQuestion.toString() + " / " + 10
         currentQuestion++
-        holder?.correctAnswer = question.correct_answer
+        //holder?.correctAnswer = question.correct_answer
+        notifyDataSetChanged()
     }
 
     // Extension to shuffle answers/questions
@@ -52,90 +53,90 @@ class QuestionsAdapter(val questionList: MutableList<Questions>): RecyclerView.A
 }
 
 class QuestionViewHolder(val customView: View, answer: Questions? = null): RecyclerView.ViewHolder(customView) {
-    private var score = 0
-    var intent = Intent()
-
-    companion object {
-        val SCORE = "SCORE"
-    }
-    var correctAnswer = answer?.correct_answer
-
-    init {
-        customView.button1.setOnClickListener {
-            if (customView.button1.text == correctAnswer) {
-                score++
+//    private var score = 0
+//    var intent = Intent()
+//
+//    companion object {
+//        val SCORE = "SCORE"
+//    }
+//    var correctAnswer = answer?.correct_answer
+//
+//    init {
+//        customView.button1.setOnClickListener {
+//            if (customView.button1.text == correctAnswer) {
+//                score++
+////                intent = Intent(customView.context, GetQuestionsActivity::class.java).apply {
+////                    putExtra(SCORE, score)
+////                }
+////                customView.context.startActivity(intent)
+//                Toast.makeText(customView.context, "You got it correct!", Toast.LENGTH_SHORT).show()
+//            }
+//            else{
 //                intent = Intent(customView.context, GetQuestionsActivity::class.java).apply {
 //                    putExtra(SCORE, score)
 //                }
-//                customView.context.startActivity(intent)
-                Toast.makeText(customView.context, "You got it correct!", Toast.LENGTH_SHORT).show()
-            }
-            else{
-                intent = Intent(customView.context, GetQuestionsActivity::class.java).apply {
-                    putExtra(SCORE, score)
-                }
-//                customView.context.startActivity(intent)
-                Toast.makeText(customView.context, "You got it wrong! The answer is: $correctAnswer", Toast.LENGTH_SHORT).show()
-            }
-            customView.context.startActivity(intent)
-        }
-
-        customView.button2.setOnClickListener {
-            if (customView.button2.text == correctAnswer) {
-                score++
-                intent = Intent(customView.context, GetQuestionsActivity::class.java).apply {
-                    putExtra(SCORE, score)
-                }
-//                customView.context.startActivity(intent)
-                Toast.makeText(customView.context, "You got it correct!", Toast.LENGTH_SHORT).show()
-            }
-            else{
-                intent = Intent(customView.context, GetQuestionsActivity::class.java).apply {
-                    putExtra(SCORE, score)
-                }
-//                customView.context.startActivity(intent)
-                Toast.makeText(customView.context, "You got it wrong! The answer is: $correctAnswer", Toast.LENGTH_SHORT).show()
-            }
-            customView.context.startActivity(intent)
-        }
-
-        customView.button3.setOnClickListener {
-            if (customView.button3.text == correctAnswer) {
-                score++
-                intent = Intent(customView.context, GetQuestionsActivity::class.java).apply {
-                    putExtra(SCORE, score)
-                }
-//                customView.context.startActivity(intent)
-                Toast.makeText(customView.context, "You got it correct!", Toast.LENGTH_SHORT).show()
-            }
-            else{
-                intent = Intent(customView.context, GetQuestionsActivity::class.java).apply {
-                    putExtra(SCORE, score)
-                }
-//                customView.context.startActivity(intent)
-                Toast.makeText(customView.context, "You got it wrong! The answer is: $correctAnswer", Toast.LENGTH_SHORT).show()
-            }
-            customView.context.startActivity(intent)
-        }
-
-        customView.button4.setOnClickListener {
-            if (customView.button4.text == correctAnswer) {
-                score++
-                intent = Intent(customView.context, GetQuestionsActivity::class.java).apply {
-                    putExtra(SCORE, score)
-                }
-//                customView.context.startActivity(intent)
-                Toast.makeText(customView.context, "You got it correct!", Toast.LENGTH_SHORT).show()
-            }
-            else{
-                intent = Intent(customView.context, GetQuestionsActivity::class.java).apply {
-                    putExtra(SCORE, score)
-                }
-//                customView.context.startActivity(intent)
-                Toast.makeText(customView.context, "You got it wrong! The answer is: $correctAnswer", Toast.LENGTH_SHORT).show()
-            }
-            customView.context.startActivity(intent)
-        }
-    }
+////                customView.context.startActivity(intent)
+//                Toast.makeText(customView.context, "You got it wrong! The answer is: $correctAnswer", Toast.LENGTH_SHORT).show()
+//            }
+//            customView.context.startActivity(intent)
+//        }
+//
+//        customView.button2.setOnClickListener {
+//            if (customView.button2.text == correctAnswer) {
+//                score++
+//                intent = Intent(customView.context, GetQuestionsActivity::class.java).apply {
+//                    putExtra(SCORE, score)
+//                }
+////                customView.context.startActivity(intent)
+//                Toast.makeText(customView.context, "You got it correct!", Toast.LENGTH_SHORT).show()
+//            }
+//            else{
+//                intent = Intent(customView.context, GetQuestionsActivity::class.java).apply {
+//                    putExtra(SCORE, score)
+//                }
+////                customView.context.startActivity(intent)
+//                Toast.makeText(customView.context, "You got it wrong! The answer is: $correctAnswer", Toast.LENGTH_SHORT).show()
+//            }
+//            customView.context.startActivity(intent)
+//        }
+//
+//        customView.button3.setOnClickListener {
+//            if (customView.button3.text == correctAnswer) {
+//                score++
+//                intent = Intent(customView.context, GetQuestionsActivity::class.java).apply {
+//                    putExtra(SCORE, score)
+//                }
+////                customView.context.startActivity(intent)
+//                Toast.makeText(customView.context, "You got it correct!", Toast.LENGTH_SHORT).show()
+//            }
+//            else{
+//                intent = Intent(customView.context, GetQuestionsActivity::class.java).apply {
+//                    putExtra(SCORE, score)
+//                }
+////                customView.context.startActivity(intent)
+//                Toast.makeText(customView.context, "You got it wrong! The answer is: $correctAnswer", Toast.LENGTH_SHORT).show()
+//            }
+//            customView.context.startActivity(intent)
+//        }
+//
+//        customView.button4.setOnClickListener {
+//            if (customView.button4.text == correctAnswer) {
+//                score++
+//                intent = Intent(customView.context, GetQuestionsActivity::class.java).apply {
+//                    putExtra(SCORE, score)
+//                }
+////                customView.context.startActivity(intent)
+//                Toast.makeText(customView.context, "You got it correct!", Toast.LENGTH_SHORT).show()
+//            }
+//            else{
+//                intent = Intent(customView.context, GetQuestionsActivity::class.java).apply {
+//                    putExtra(SCORE, score)
+//                }
+////                customView.context.startActivity(intent)
+//                Toast.makeText(customView.context, "You got it wrong! The answer is: $correctAnswer", Toast.LENGTH_SHORT).show()
+//            }
+//            customView.context.startActivity(intent)
+//        }
+//    }
 
 }
