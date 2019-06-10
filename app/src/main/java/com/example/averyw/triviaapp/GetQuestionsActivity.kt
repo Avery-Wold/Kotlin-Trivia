@@ -1,16 +1,12 @@
 package com.example.averyw.triviaapp
 
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AlertDialog
+import android.os.Handler
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
 import android.text.Html
 import android.view.View
-import android.widget.Toast
 import com.google.gson.GsonBuilder
-import kotlinx.android.synthetic.main.activity_question.*
 import kotlinx.android.synthetic.main.questions_detail.*
 import okhttp3.*
 import java.io.IOException
@@ -21,29 +17,27 @@ import java.util.*
  */
 
 const val TOTAL_SCORE = ""
-const val NUM_QUESTIONS = ""
 
 class GetQuestionsActivity : AppCompatActivity() {
 
     var questions : MutableList<Questions> = ArrayList()
-//    val questionList: MutableList<Questions>
-    // new
     var index = -1
     var score = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        setContentView(R.layout.activity_question)
-//        recyclerView_questions.layoutManager = LinearLayoutManager(this)
-//        setContentView(R.layout.questions_detail)
-//       recyclerView_questions.adapter = QuestionsAdapter()
 
-        // new
         setContentView(R.layout.questions_detail)
         button1.setOnClickListener(clickListener)
         button2.setOnClickListener(clickListener)
         button3.setOnClickListener(clickListener)
         button4.setOnClickListener(clickListener)
+
+        sflMockContent.startShimmerAnimation()
+        Handler().postDelayed( {
+            sflMockContent.visibility = View.GONE
+            llRealContent.visibility = View.VISIBLE
+        },2000)
 
         fetchData()
     }
@@ -54,29 +48,21 @@ class GetQuestionsActivity : AppCompatActivity() {
             R.id.button1-> {
                 if(button1.text == correctAnswer){
                     score++
-                } else {
-                    Toast.makeText(this, "Sorry, the correct answer was $correctAnswer", Toast.LENGTH_SHORT).show()
                 }
             }
             R.id.button2-> {
                 if(button2.text == correctAnswer){
                     score++
-                } else {
-                    Toast.makeText(this, "Sorry, the correct answer was $correctAnswer", Toast.LENGTH_SHORT).show()
                 }
             }
             R.id.button3-> {
                 if(button3.text == correctAnswer){
                     score++
-                } else {
-                    Toast.makeText(this, "Sorry, the correct answer was $correctAnswer", Toast.LENGTH_SHORT).show()
                 }
             }
             R.id.button4-> {
                 if(button4.text == correctAnswer){
                     score++
-                } else {
-                    Toast.makeText(this, "Sorry, the correct answer was $correctAnswer", Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -91,21 +77,21 @@ class GetQuestionsActivity : AppCompatActivity() {
 
         client.newCall(request).enqueue(object: Callback {
             override fun onResponse(call: Call?, response: Response?) {
-                val body = response?.body()?.string()
-                val gson = GsonBuilder().create()
-                val questionList = gson.fromJson(body, QuestionList::class.java)
-                runOnUiThread {
-                    for (i in 0..questionList.results.size - 1){
-                        val currentObject = questionList.results[i]
-                        val obj = Questions()
-                        obj.question = currentObject.question
-                        obj.incorrect_answers = currentObject.incorrect_answers
-                        obj.correct_answer = currentObject.correct_answer
-                        questions.add(obj)
-//                        recyclerView_questions.adapter = QuestionsAdapter(questions)
+                if(response?.code() == 200) {
+                    val body = response?.body()?.string()
+                    val gson = GsonBuilder().create()
+                    val questionList = gson.fromJson(body, QuestionList::class.java)
+                    runOnUiThread {
+                        for (i in 0..questionList.results.size - 1) {
+                            val currentObject = questionList.results.get(i)
+                            val obj = Questions()
+                            obj.question = currentObject.question
+                            obj.incorrect_answers = currentObject.incorrect_answers
+                            obj.correct_answer = currentObject.correct_answer
+                            questions.add(obj)
+                        }
+                        getQuestion()
                     }
-                    // new
-                    getQuestion()
                 }
             }
 
@@ -132,7 +118,7 @@ class GetQuestionsActivity : AppCompatActivity() {
         }
     }
 
-    fun updateQuestion(){
+    private fun updateQuestion(){
         index++
         if (index < questions.size){
             val question = questions[index]
@@ -149,24 +135,13 @@ class GetQuestionsActivity : AppCompatActivity() {
         } else {
             intent = Intent(this, ResultsActivity::class.java).apply {
                 putExtra(TOTAL_SCORE, score)
-//                putExtra(NUM_QUESTIONS, questions.size)
             }
             startActivity(intent)
-            // add ending screen
-//            val dialog = AlertDialog.Builder(this)
-//            dialog.setTitle("Your score")
-//            dialog.setMessage("You have answered $score out of ${questions.size} correct")
-//            dialog.setPositiveButton("Close", DialogInterface.OnClickListener(){
-//                dialogInterface: DialogInterface, i: Int -> dialogInterface.dismiss()
-//                finish()
-//            })
-//            dialog.show()
         }
     }
 
-    // new
     // Extension to shuffle answers/questions
-    fun <T> Iterable<T>.shuffle(): List<T> {
+    private fun <T> Iterable<T>.shuffle(): List<T> {
         val list = this.toMutableList().apply {  }
         Collections.shuffle(list)
         return list
