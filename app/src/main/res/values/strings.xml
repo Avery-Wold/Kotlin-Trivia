@@ -3,4 +3,21 @@
     <string name="easy">Easy</string>
     <string name="med">Medium</string>
     <string name="hard">Hard</string>
+    <string name="intro">Test your trivia knowledge with this app, simply select a difficulty to begin</string>
+
+    <string-array name="category_list">
+        <item>--SELECT CATEGORY--</item>
+        <item>Any</item>
+        <item>Books</item>
+        <item>Celebrities</item>
+        <item>Computers</item>
+        <item>General</item>
+        <item>History</item>
+        <item>Movies</item>
+        <item>Music</item>
+        <item>Science &amp; Nature</item>
+        <item>Sports</item>
+        <item>Television</item>
+        <item>Video Games</item>
+    </string-array>
 </resources>

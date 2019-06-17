@@ -13,11 +13,29 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:text="Test your trivia knowledge with this app, simply select a difficulty to begin"
+        android:text="@string/intro"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Dynamic -->
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_margin="10dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/textView_intro"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteX="10dp"
+        android:entries="@array/category_list"
+        android:background="@drawable/spinner_rect"
+        android:paddingLeft="20dp"
+        style="@style/ThemeSpinner" />
 
     <Button
         android:id="@+id/btnEasy"
@@ -35,7 +53,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_intro" />
+        app:layout_constraintTop_toBottomOf="@+id/spinner" />
 
     <Button
         android:id="@+id/btnMed"
@@ -73,6 +91,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnMed" />
 
-
+    <!--<Button-->
+        <!--android:id="@+id/btnSpinner"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="75dp"-->
+        <!--android:layout_marginEnd="8dp"-->
+        <!--android:layout_marginStart="8dp"-->
+        <!--android:layout_marginTop="40dp"-->
+        <!--android:background="@drawable/btn_rounded"-->
+        <!--android:onClick="getValues"-->
+        <!--android:text="Spinner Value"-->
+        <!--android:textColor="@color/btn_text"-->
+        <!--android:textSize="30sp"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintHorizontal_bias="0.0"-->
+        <!--app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/btnHard" />-->
 
 </android.support.constraint.ConstraintLayout>

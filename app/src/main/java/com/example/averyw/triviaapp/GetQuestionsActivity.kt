@@ -21,13 +21,16 @@ const val TOTAL_SCORE = ""
 class GetQuestionsActivity : AppCompatActivity() {
 
     var questions : MutableList<Questions> = ArrayList()
-    var index = -1
-    var score = 0
+    private var index = -1
+    private var score = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.questions_detail)
+
+        val cat = intent.getStringExtra(GET_CAT)
+        supportActionBar?.title = cat + " Questions"
+
         button1.setOnClickListener(clickListener)
         button2.setOnClickListener(clickListener)
         button3.setOnClickListener(clickListener)
@@ -70,8 +73,9 @@ class GetQuestionsActivity : AppCompatActivity() {
     }
 
     private fun fetchData() {
-        val difficulty = intent.getStringExtra(GET_DIFFICULTY)
-        val questionsUrl = "https://opentdb.com/api.php?amount=10&difficulty=$difficulty&type=multiple"
+        var difficulty: String? = intent.getStringExtra(GET_DIFFICULTY)
+        var id: Int? = intent.getIntExtra(GET_ID, -1)
+        val questionsUrl = "https://opentdb.com/api.php?amount=10&category=$id&difficulty=$difficulty&type=multiple"
         val client = OkHttpClient()
         val request = Request.Builder().url(questionsUrl).build()
 

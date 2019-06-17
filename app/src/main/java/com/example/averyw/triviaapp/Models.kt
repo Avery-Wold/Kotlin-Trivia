@@ -13,3 +13,9 @@ class Questions(
         var incorrect_answers: List<String> = emptyList()
 )
 
+data class Categories(
+        var category: String,
+        var id: Int
+)
+
+

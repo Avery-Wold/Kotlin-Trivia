@@ -25,8 +25,9 @@ class ResultsActivity : AppCompatActivity() {
             results_textView.text = "Not Good"
         } else if(totalpercentRight < 70){
             results_textView.text = "Almost"
-        }
-        else{
+        } else if(totalpercentRight < 10){
+            results_textView.text = "Nice job dumbass"
+        } else{
             results_textView.text = "Good job!"
         }
         score_textView.text = "You got $score out of $numOfQuestion correct"
